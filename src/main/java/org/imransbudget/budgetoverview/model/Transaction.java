@@ -1,5 +1,7 @@
 package org.imransbudget.budgetoverview.model;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -17,5 +19,8 @@ public class Transaction {
     private Long id;
 
     private Double amount;
+
+    @Enumerated(EnumType.STRING)
+    private TransactionType type;
 
 }

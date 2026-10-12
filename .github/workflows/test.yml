@@ -5,13 +5,15 @@ on:
     branches: [ master ]
 jobs:
   test:
-    runs-on: ubuntu-latest
-    container: node:14.17.6-alpine3.14
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
         with:
-          node-version: '14'
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
+          java-version: '25'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Build and Test with Maven
+        run: mvn -B clean package --file pom.xml
